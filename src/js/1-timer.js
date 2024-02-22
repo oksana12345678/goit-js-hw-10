@@ -5,8 +5,10 @@ import 'izitoast/dist/css/iziToast.min.css';
 
 const inputDateTimePicker = document.getElementById('datetime-picker');
 const btnStart = document.querySelector('[data-start]');
+const timerFilds = document.querySelectorAll('.timer .value');
 
 let userSelectedDate = null;
+let countdownInterval = null;
 
 const options = {
   enableTime: true,
@@ -14,40 +16,51 @@ const options = {
   defaultDate: new Date(),
   minuteIncrement: 1,
   onClose(selectedDates) {
-    console.log(selectedDates[0]);
-    if (selectedDates[0] < new Date()) {
-      iziToast.error({
-        title: 'Error',
-        message: 'Please choose a date in the future',
-      });
-      btnStart.disabled = true;
-    } else {
-      userSelectedDate = selectedDates[0];
-      btnStart.disabled = false;
-    }
+    userSelectedDate = selectedDates[0];
+    validateSelectedDate();
   },
 };
 flatpickr(inputDateTimePicker, options);
 
-
-btnStart.addEventListener('click', (e) =>{
- 
-  if (userSelectedDate === null) {
+function validateSelectedDate() {
+  if (!userSelectedDate || userSelectedDate < new Date()) {
     iziToast.error({
       title: 'Error',
-      message: 'Please choose a date',
+      message: 'Please choose a date in the future',
+      position: 'topRight',
     });
+    btnStart.disable = true;
+  } else {
+    btnStart.disable = false;
+  }
+}
+function addLeadingZero(value) {
+  return value < 10 ? '0' + value : value;
+}
+
+function updateTimer() {
+  const now = new Date();
+  const msDifference = userSelectedDate - now;
+  if (msDifference <= 0) {
+    clearInterval(countdownInterval);
+
+    timerFilds.forEach(field => (field.textContent = '00'));
     return;
   }
-  const date = userSelectedDate.toISOString().split('T')[0];
-  const time = userSelectedDate.toISOString().split('T')[1].split('.')[0];
-  const data = {
-    date: date,
-    time: time,
-  };
-  console.log(data);
-  e.preventDefault();
-})
+
+  const { days, hours, minutes, seconds } = convertMs(msDifference);
+  timerFilds[0].textContent = addLeadingZero(days);
+  timerFilds[0].textContent = addLeadingZero(hours);
+  timerFilds[0].textContent = addLeadingZero(minutes);
+  timerFilds[0].textContent = addLeadingZero(seconds);
+}
+
+btnStart.addEventListener('click', e => {
+  btnStart.disable = true;
+  inputDateTimePicker.disable = true;
+  updateTimer();
+  countdownInterval = setInterval(updateTimer, 1000);
+});
 
 function convertMs(ms) {
   // Number of milliseconds per unit of time
