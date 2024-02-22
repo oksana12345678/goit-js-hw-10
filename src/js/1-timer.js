@@ -29,9 +29,9 @@ function validateSelectedDate() {
       message: 'Please choose a date in the future',
       position: 'topRight',
     });
-    btnStart.disable = true;
+    btnStart.disabled = true;
   } else {
-    btnStart.disable = false;
+    btnStart.disabled = false;
   }
 }
 function addLeadingZero(value) {
@@ -50,14 +50,14 @@ function updateTimer() {
 
   const { days, hours, minutes, seconds } = convertMs(msDifference);
   timerFilds[0].textContent = addLeadingZero(days);
-  timerFilds[0].textContent = addLeadingZero(hours);
-  timerFilds[0].textContent = addLeadingZero(minutes);
-  timerFilds[0].textContent = addLeadingZero(seconds);
+  timerFilds[1].textContent = addLeadingZero(hours);
+  timerFilds[2].textContent = addLeadingZero(minutes);
+  timerFilds[3].textContent = addLeadingZero(seconds);
 }
 
 btnStart.addEventListener('click', e => {
-  btnStart.disable = true;
-  inputDateTimePicker.disable = true;
+  btnStart.disabled = true;
+  inputDateTimePicker.disabled = true;
   updateTimer();
   countdownInterval = setInterval(updateTimer, 1000);
 });
