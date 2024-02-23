@@ -5,8 +5,8 @@
   |============================
 */
 @import url('./reset.css');
-@import url('./timer.css');
-@import url('./reset.css');
+/* @import url('./timer.css'); */
+/* @import url('./reset.css'); */
 
 :root {
   font-family: Inter, Avenir, Helvetica, Arial, sans-serif;
@@ -22,4 +22,28 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
+}
+.list-container {
+  display: flex;
+  flex-direction: row;
+
+  gap: 24px;
+}
+.link-list {
+  border-radius: 8px;
+  padding: 8px 16px;
+  width: 75px;
+  height: 40px;
+  background-color: #4e75ff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font: 500 16px / 1.5 'Montserrat', sans-serif;
+  letter-spacing: 0.04em;
+  color: #fff;
+  transition: background-color 400ms;
+}
+
+.link-list:hover {
+  background-color: #6c8cff;
 }
