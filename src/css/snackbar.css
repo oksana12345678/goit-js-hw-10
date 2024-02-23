@@ -8,7 +8,6 @@ body {
   flex-direction: column;
   gap: 24px;
   justify-content: center;
-  align-items: center;
   box-sizing: border-box;
 }
 input[type='number' i] {
