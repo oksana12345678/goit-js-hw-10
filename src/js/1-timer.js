@@ -53,7 +53,7 @@ btnStart.addEventListener('click', e => {
   }
   iziToast.success({
     title: 'Success',
-    message: 'The counter started counting down',
+    message: 'The countdown has started',
     position: 'topRight',
   });
 
