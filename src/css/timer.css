@@ -1,0 +1,25 @@
+.timer {
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+}
+
+field {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-direction: column;
+  gap: 0px;
+  width: 55px;
+  height: 72px;
+}
+.value {
+  font: 400 40px / 1.2 'Montserrat', sans-serif;
+  letter-spacing: 0.04em;
+  color: #2e2f42;
+}
+
+.label {
+  font: 400 16px / 1.5 'Montserrat', sans-serif;
+  color: #2e2f42;
+}
