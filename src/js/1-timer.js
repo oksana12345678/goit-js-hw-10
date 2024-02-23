@@ -51,6 +51,11 @@ btnStart.addEventListener('click', e => {
     });
     return;
   }
+  iziToast.success({
+    title: 'Success',
+    message: 'The counter started counting down',
+    position: 'topRight',
+  });
 
   btnStart.disabled = true;
   inputDateTimePicker.disabled = true;
