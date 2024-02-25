@@ -36,6 +36,7 @@ function updateTimer() {
   }
 
   const { days, hours, minutes, seconds } = convertMs(msDifference);
+	
   timerFilds[0].textContent = addLeadingZero(days);
   timerFilds[1].textContent = addLeadingZero(hours);
   timerFilds[2].textContent = addLeadingZero(minutes);
