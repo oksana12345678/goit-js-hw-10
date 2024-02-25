@@ -21,6 +21,24 @@ const options = {
 };
 flatpickr(inputDateTimePicker, options);
 
+function checkValidData() {
+  if (!userSelectedDate || userSelectedDate <= new Date()) {
+    iziToast.error({
+      title: 'Error',
+      message: 'Please choose a date in the future',
+      position: 'topRight',
+    });
+    btnStart.disabled = true;
+  } else {
+    btnStart.disabled = false;
+    iziToast.success({
+      title: 'Success',
+      message: 'The countdown has started',
+      position: 'topRight',
+    });
+  }
+}
+
 function addLeadingZero(value) {
   return value < 10 ? '0' + value : value;
 }
@@ -61,6 +79,10 @@ btnStart.addEventListener('click', e => {
   inputDateTimePicker.disabled = true;
   updateTimer();
   countdownInterval = setInterval(updateTimer, 1000);
+});
+
+document.addEventListener('DOMContentLoaded', function () {
+  btnStart.disabled = true;
 });
 
 function convertMs(ms) {
