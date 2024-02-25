@@ -17,9 +17,29 @@ const options = {
   minuteIncrement: 1,
   onClose(selectedDates) {
     userSelectedDate = selectedDates[0];
+    validateSelectedDate();
   },
 };
 flatpickr(inputDateTimePicker, options);
+
+function validateSelectedDate() {
+  if (!userSelectedDate || userSelectedDate <= new Date()) {
+    iziToast.error({
+      title: 'Error',
+      message: 'Please choose a date in the future',
+      position: 'topRight',
+    });
+
+    btnStart.disabled = true;
+  } else {
+    btnStart.disabled = false;
+    iziToast.success({
+      title: 'Success',
+      message: 'The counter started counting down',
+      position: 'topRight',
+    });
+  }
+}
 
 function addLeadingZero(value) {
   return value < 10 ? '0' + value : value;
@@ -36,7 +56,7 @@ function updateTimer() {
   }
 
   const { days, hours, minutes, seconds } = convertMs(msDifference);
-	
+
   timerFilds[0].textContent = addLeadingZero(days);
   timerFilds[1].textContent = addLeadingZero(hours);
   timerFilds[2].textContent = addLeadingZero(minutes);
@@ -44,24 +64,13 @@ function updateTimer() {
 }
 
 btnStart.addEventListener('click', e => {
-  if (userSelectedDate <= new Date()) {
-    iziToast.error({
-      title: 'Error',
-      message: 'Please choose a date in the future',
-      position: 'topRight',
-    });
-    return;
-  }
-  iziToast.success({
-    title: 'Success',
-    message: 'The counter started counting down',
-    position: 'topRight',
-  });
-
   btnStart.disabled = true;
   inputDateTimePicker.disabled = true;
   updateTimer();
   countdownInterval = setInterval(updateTimer, 1000);
+});
+document.addEventListener('DOMContentLoaded', function () {
+  btnStart.disabled = true;
 });
 
 function convertMs(ms) {
