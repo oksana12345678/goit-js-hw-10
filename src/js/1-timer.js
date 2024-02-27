@@ -62,20 +62,6 @@ function updateTimer() {
 }
 
 btnStart.addEventListener('click', e => {
-  if (userSelectedDate <= new Date()) {
-    iziToast.error({
-      title: 'Error',
-      message: 'Please choose a date in the future',
-      position: 'topRight',
-    });
-    return;
-  }
-  iziToast.success({
-    title: 'Success',
-    message: 'The countdown has started',
-    position: 'topRight',
-  });
-
   btnStart.disabled = true;
   inputDateTimePicker.disabled = true;
   updateTimer();
