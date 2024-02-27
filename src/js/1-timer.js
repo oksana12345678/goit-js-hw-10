@@ -34,7 +34,7 @@ function checkValidData() {
     btnStart.disabled = false;
     iziToast.success({
       title: 'Success',
-      message: 'The countdown has started',
+      message: 'Correct date',
       position: 'topRight',
     });
   }
