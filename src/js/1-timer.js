@@ -5,7 +5,7 @@ import 'izitoast/dist/css/iziToast.min.css';
 
 const inputDateTimePicker = document.getElementById('datetime-picker');
 const btnStart = document.querySelector('[data-start]');
-const timerFilds = document.querySelectorAll('.timer .value');
+const timerFields = document.querySelectorAll('.timer .value');
 
 let userSelectedDate = null;
 let countdownInterval = null;
@@ -31,15 +31,15 @@ function updateTimer() {
   if (msDifference <= 0) {
     clearInterval(countdownInterval);
 
-    timerFilds.forEach(field => (field.textContent = '00'));
+    timerFields.forEach(field => (field.textContent = '00'));
     return;
   }
 
   const { days, hours, minutes, seconds } = convertMs(msDifference);
-  timerFilds[0].textContent = addLeadingZero(days);
-  timerFilds[1].textContent = addLeadingZero(hours);
-  timerFilds[2].textContent = addLeadingZero(minutes);
-  timerFilds[3].textContent = addLeadingZero(seconds);
+  timerFields[0].textContent = addLeadingZero(days);
+  timerFields[1].textContent = addLeadingZero(hours);
+  timerFields[2].textContent = addLeadingZero(minutes);
+  timerFields[3].textContent = addLeadingZero(seconds);
 }
 
 btnStart.addEventListener('click', e => {
