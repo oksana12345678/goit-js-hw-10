@@ -12,32 +12,34 @@ function handleSubmit(event) {
 
   const stateInput = this.elements.state;
   const state = stateInput.value;
-  setTimeout(() => {
-    const promise = new Promise((resolve, reject) => {
+
+  let promise;
+
+  promise = new Promise((resolve, reject) => {
+    setTimeout(() => {
       if (state === 'fulfilled') {
         resolve(delay);
       } else if (state === 'rejected') {
         reject(delay);
       }
+    }, delay);
+  });
+  promise
+    .then(delay => {
+      iziToast.success({
+        title: 'Success',
+        message: `✅ Fulfilled promise in ${delay}ms`,
+        position: 'topRight',
+      });
+    })
+
+    .catch(delay => {
+      iziToast.error({
+        title: 'Error',
+        message: `❌ Rejected promise in ${delay}ms`,
+        position: 'topRight',
+      });
     });
 
-    promise.then(
-      delay => {
-        iziToast.success({
-          title: 'Success',
-          message: `✅ Fulfilled promise in ${delay}ms`,
-          position: 'topRight',
-        });
-      },
-
-      delay => {
-        iziToast.error({
-          title: 'Error',
-          message: `❌ Rejected promise in ${delay}ms`,
-          position: 'topRight',
-        });
-      }
-    );
-  }, delay);
   event.currentTarget.reset();
 }
