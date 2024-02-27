@@ -17,6 +17,7 @@ const options = {
   minuteIncrement: 1,
   onClose(selectedDates) {
     userSelectedDate = selectedDates[0];
+    checkValidData();
   },
 };
 flatpickr(inputDateTimePicker, options);
